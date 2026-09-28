@@ -451,6 +451,7 @@ define([
                 toolbar.btnInsertEquation.on('click',                       _.bind(this.onInsertEquationClick, this));
                 toolbar.btnInsertSymbol.menu.items[2].on('click',           _.bind(this.onInsertSymbolClick, this));
                 toolbar.mnuInsertSymbolsPicker.on('item:click',             _.bind(this.onInsertSymbolItemClick, this));
+                toolbar.btnInsertCheckbox.on('click',                       _.bind(this.onInsertCheckboxClick, this));
                 toolbar.btnInsertSlicer.on('click',                         _.bind(this.onInsertSlicerClick, this));
                 toolbar.btnTableTemplate.menu.on('show:after',              _.bind(this.onTableTplMenuOpen, this));
                 toolbar.btnPercentStyle.on('click',                         _.bind(this.onNumberFormat, this));
@@ -4250,6 +4251,12 @@ define([
                 Common.component.Analytics.trackEvent('ToolBar', 'Add Equation');
             }
             Common.NotificationCenter.trigger('edit:complete', this.toolbar, this.toolbar.btnInsertEquation);
+        },
+
+        onInsertCheckboxClick: function() {
+            this.api && this.api.asc_insertCheckbox();
+            Common.NotificationCenter.trigger('edit:complete', this.toolbar, this.toolbar.btnInsertCheckbox);
+            Common.component.Analytics.trackEvent('ToolBar', 'Checkbox');
         },
 
         onInsertSymbolClick: function() {
