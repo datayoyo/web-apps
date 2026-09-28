@@ -1078,7 +1078,11 @@ define([
 
                 Common.NotificationCenter.trigger('edit:complete', this.toolbar);
                 Common.component.Analytics.trackEvent('ToolBar', 'Image');
-            } else if (item.value === 'url') {
+            } else if (item.value === 'cell-file') {
+                this.api && setTimeout(function() {me.api.asc_addImageInCell();}, 1);
+                Common.NotificationCenter.trigger('edit:complete', this.toolbar);
+            } else if (item.value === 'url' || item.value === 'cell-url') {
+                var inCell = item.value === 'cell-url';
                 (new Common.Views.ImageFromUrlDialog({
                     handler: function(result, value) {
                         if (result == 'ok') {
@@ -1086,7 +1090,7 @@ define([
                                 var checkUrl = value.replace(/\s/g, '');
                                 if (!_.isEmpty(checkUrl)) {
                                     me.toolbar.fireEvent('insertimage', me.toolbar);
-                                    me.api.asc_addImageDrawingObject([checkUrl]);
+                                    inCell ? me.api.asc_addImageInCellUrl([checkUrl]) : me.api.asc_addImageDrawingObject([checkUrl]);
 
                                     Common.component.Analytics.trackEvent('ToolBar', 'Image');
                                 }

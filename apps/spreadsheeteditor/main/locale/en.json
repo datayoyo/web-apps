@@ -4948,6 +4948,8 @@
   "SSE.Views.Toolbar.mniImageFromFile": "Image from file",
   "SSE.Views.Toolbar.mniImageFromStorage": "Image from storage",
   "SSE.Views.Toolbar.mniImageFromUrl": "Image from URL",
+  "SSE.Views.Toolbar.mniImageInCellFromFile": "Picture in cell from file",
+  "SSE.Views.Toolbar.mniImageInCellFromUrl": "Picture in cell from URL",
   "SSE.Views.Toolbar.mniLowerCase": "lowercase",
   "SSE.Views.Toolbar.mniSentenceCase": "Sentence case.",
   "SSE.Views.Toolbar.mniToggleCase": "tOGGLE cASE",

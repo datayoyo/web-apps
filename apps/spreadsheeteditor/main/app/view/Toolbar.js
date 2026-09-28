@@ -1369,7 +1369,10 @@ define([
                         items: [
                             { caption: me.mniImageFromFile, value: 'file' },
                             { caption: me.mniImageFromUrl,  value: 'url' },
-                            { caption: me.mniImageFromStorage, value: 'storage'}
+                            { caption: me.mniImageFromStorage, value: 'storage'},
+                            { caption: '--' },
+                            { caption: me.mniImageInCellFromFile, value: 'cell-file' },
+                            { caption: me.mniImageInCellFromUrl, value: 'cell-url' }
                         ]
                     }),
                     action: 'insert-image',
