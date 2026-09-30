@@ -471,6 +471,8 @@ define([
                     var sid = me.api.asc_getActiveWorksheetId();
 
                     while (++i < wc) {
+                        // very hidden sheets stay out of the tabs, the Unhide menu and the sheet list, as in Excel
+                        if (me.api.asc_isWorksheetVeryHidden && me.api.asc_isWorksheetVeryHidden(i)) continue;
                         locked = me.api.asc_isWorksheetLockedOrDeleted(i);
                         name = me.api.asc_getActiveNamedSheetView ? me.api.asc_getActiveNamedSheetView(i) || '' : '';
                         var sheetid = me.api.asc_getWorksheetId(i)
