@@ -471,8 +471,6 @@ define([
                     var sid = me.api.asc_getActiveWorksheetId();
 
                     while (++i < wc) {
-                        // very hidden sheets stay out of the tabs, the Unhide menu and the sheet list, as in Excel
-                        if (me.api.asc_isWorksheetVeryHidden && me.api.asc_isWorksheetVeryHidden(i)) continue;
                         locked = me.api.asc_isWorksheetLockedOrDeleted(i);
                         name = me.api.asc_getActiveNamedSheetView ? me.api.asc_getActiveNamedSheetView(i) || '' : '';
                         var sheetid = me.api.asc_getWorksheetId(i)
@@ -490,7 +488,12 @@ define([
                             iconTitle     : name,
                             iconVisible   : name!==''
                         };
-                        this.api.asc_isWorksheetHidden(i)? me.hiddenItems.push(tab) : items.push(tab);
+                        // very hidden sheets stay out of the tabs, the Unhide menu and the sheet list, as in Excel.
+                        // They still get a (never shown) sheet list entry: the controller reaches an entry
+                        // by its sheet index, so the list must keep one entry per sheet.
+                        tab.veryHidden = !!(me.api.asc_isWorksheetVeryHidden && me.api.asc_isWorksheetVeryHidden(i));
+                        if (!tab.veryHidden)
+                            this.api.asc_isWorksheetHidden(i)? me.hiddenItems.push(tab) : items.push(tab);
                         allItems.push(tab);
                     }
                     if (me.hiddenItems.length) {
@@ -530,7 +533,7 @@ define([
                             checkable: true,
                             checked: item.active,
                             hidden: hidden,
-                            visible: !hidden || !wbprotected,
+                            visible: !item.veryHidden && (!hidden || !wbprotected),
                             textHidden: me.itemHidden,
                             template: _.template([
                                 '<a id="<%= id %>" style="<%= style %>" tabindex="-1" type="menuitem" <% if (options.hidden) { %> data-hidden="true" <% } %>>',
