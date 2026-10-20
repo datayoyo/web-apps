@@ -62,7 +62,7 @@ require.config({
         keymaster       : 'common/main/lib/core/keymaster',
         tip             : 'common/main/lib/util/Tip',
         localstorage    : 'common/main/lib/util/LocalStorage',
-        analytics       : 'common/Analytics',
+        analytics       : 'common/EditorEvents', // not "Analytics": ad blockers' /common/analytics.js rule would stop the editor from loading
         gateway         : 'common/Gateway',
         locale          : 'common/locale',
         irregularstack  : 'common/IrregularStack'
